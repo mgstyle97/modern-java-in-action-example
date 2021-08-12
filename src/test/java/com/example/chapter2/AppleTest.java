@@ -44,6 +44,27 @@ class AppleTest {
     }
 
     @Test
+    @DisplayName("사과 색상: 빨강 - 익명 클래스 사용")
+    void extract_apple_list_color_red_usage_anonymous_class() {
+        List<Apple> redApples = Apple.filterApples(inventory, new ApplePredicate() {
+            @Override
+            public boolean test(Apple apple) {
+                return Color.RED.equals(apple.getColor());
+            }
+        });
+
+        assertEquals(Color.RED, redApples.get(0).getColor());
+    }
+
+    @Test
+    @DisplayName("사과 색상: 빨강 - 람다 표현식 사용")
+    void extract_apple_list_color_red_usage_lambda_expression() {
+        List<Apple> redApples = Apple.filterApples(inventory, (Apple apple) -> Color.RED.equals(apple.getColor()));
+
+        assertEquals(Color.RED, redApples.get(0).getColor());
+    }
+
+    @Test
     @DisplayName("사과 무게: 150 초과")
     void extract_apple_list_weight_over_150() {
         ApplePredicate predicate = new AppleHeavyWeightPredicate();
